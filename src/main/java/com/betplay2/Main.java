@@ -1,13 +1,17 @@
 package com.betplay2;
 
+
 import java.util.Scanner;
 
 import com.betplay2.controllers.EquipoController;
+import com.betplay2.controllers.PartidoController;
+
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         EquipoController equipos = new EquipoController();
+        PartidoController partidos = new PartidoController();
         Boolean seguir = true;
         while (seguir) {
             switch (menuPrincipal(input)) {
@@ -21,7 +25,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    
+                    partidos.create(input, equipos.copiaArrayList(), equipos.getEquipos());
                     break;
                 case 3:
                     

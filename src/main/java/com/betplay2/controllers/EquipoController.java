@@ -30,4 +30,11 @@ public class EquipoController implements Create<Boolean>{
         copia.addAll(equipos);
         return copia;
     }
+    public ArrayList<Equipo> getEquipos() {
+        return equipos;
+    }
+    public void setEquipos(ArrayList<Equipo> equipos) {
+        this.equipos = equipos;
+    }
+    
 }
