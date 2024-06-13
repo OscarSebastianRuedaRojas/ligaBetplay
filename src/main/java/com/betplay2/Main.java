@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.betplay2.controllers.EquipoController;
 import com.betplay2.controllers.PartidoController;
+import com.betplay2.models.Equipo;
 
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
         EquipoController equipos = new EquipoController();
         PartidoController partidos = new PartidoController();
         Boolean seguir = true;
+        Boolean seguir2 = true;
         while (seguir) {
             switch (menuPrincipal(input)) {
                 case 1:
@@ -34,7 +36,26 @@ public class Main {
                     
                     break;
                 case 5:
-                    
+                    Equipo equipo = equipos.elegirEquipo(input);
+                    while (seguir2) {
+                        switch (menuPersonal(input)) {
+                            case 1:
+                                equipos.registrarJugador(input, equipo);
+                                break;
+                            case 2:
+                                
+                                break;
+                            case 3:
+                                
+                                break;
+                            case 4:
+                                seguir2 = false;    
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                    }
                     break;
                 case 6:
                     seguir = false;
@@ -61,4 +82,16 @@ public class Main {
         input.nextLine();
         return responder;
     }
+    public static int menuPersonal(Scanner input){
+        System.out.println("Agregar Personal");
+        System.out.println("1. Agregar Jugador");
+        System.out.println("2. Agregar Cuerpo Técnico (Ctecnico)");
+        System.out.println("3. Agregar Cuerpo Médico (Cmedico)");
+        System.out.println("4. Salir");
+        System.out.print("Seleccione una opción: ");
+        int responder = input.nextInt();
+        input.nextLine();
+        return responder;
+    }
+
 }

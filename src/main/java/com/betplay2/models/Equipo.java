@@ -12,9 +12,9 @@ public class Equipo {
     int GC = 0;
     int TP = 0;
     int puntos = 0;
-    ArrayList<Jugador> jugadores;
-    ArrayList<CMedico> cMedico;
-    ArrayList<CTecnico> cTecnico;
+    ArrayList<Jugador> jugadores = new ArrayList<>();
+    ArrayList<CMedico> cMedico = new ArrayList<>();
+    ArrayList<CTecnico> cTecnico = new ArrayList<>();
     public Equipo() {
     }
     public Equipo(String nombre) {

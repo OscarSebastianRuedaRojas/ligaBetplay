@@ -39,28 +39,30 @@ public class PartidoController {
         int goles = input.nextInt();
         int golesTotal = goles;
         input.nextLine();
-        while (true) {
-            System.out.println(String.format("Selecciona quien marco gol para el %s", equipo.getNombre()));
-            for (int i = 0; i < equipo.getJugadores().size(); i++) {
-                System.out.println(String.format("%d. %s", i+1, equipo.getJugadores().get(i).getNombre()));
-            }
-            int eleccion = input.nextInt();
-            Jugador jugador = equipo.getJugadores().get(eleccion+1);
-            input.nextLine();
-            System.out.println(String.format("Cuantos goles marco %s", jugador.getNombre()));
+        if (golesTotal>0) {
             while (true) {
-                int golesJugador = input.nextInt();
-                input.nextLine();
-                if (goles-golesJugador>=0) {
-                    goles = goles-golesJugador;
-                    jugador.setGoles(jugador.getGoles()+golesJugador);
-                    break;
-                } else{
-                    System.out.println("El jugador no pudo realizar tantos goles intentalo otra vez");
+                System.out.println(String.format("Selecciona quien marco gol para el %s", equipo.getNombre()));
+                for (int i = 0; i < equipo.getJugadores().size(); i++) {
+                    System.out.println(String.format("%d. %s", i+1, equipo.getJugadores().get(i).getNombre()));
                 }
-            }
-            if (goles==0) {
-                break;
+                int eleccion = input.nextInt();
+                Jugador jugador = equipo.getJugadores().get(eleccion-1);
+                input.nextLine();
+                System.out.println(String.format("Cuantos goles marco %s", jugador.getNombre()));
+                while (true) {
+                    int golesJugador = input.nextInt();
+                    input.nextLine();
+                    if (goles-golesJugador>=0) {
+                        goles = goles-golesJugador;
+                        jugador.setGoles(jugador.getGoles()+golesJugador);
+                        break;
+                    } else{
+                        System.out.println("El jugador no pudo realizar tantos goles intentalo otra vez");
+                    }
+                }
+                if (goles==0) {
+                    break;
+                }
             }
         }
         return golesTotal;
@@ -91,10 +93,10 @@ public class PartidoController {
         while (true) {
             System.out.println(String.format("Selecciona quien realizo una tarjeta amarilla del equipo %s", nombre));
             for (int index = 0; index < equipo.getJugadores().size(); index++) {
-                System.out.println(String.format("%d. %s", index+1, equipo.getJugadores().get(index)));
+                System.out.println(String.format("%d. %s", index+1, equipo.getJugadores().get(index).getNombre()));
             }
             int eleccion = input.nextInt();
-            Jugador jugadorAmarilla = equipo.getJugadores().get(eleccion+1);
+            Jugador jugadorAmarilla = equipo.getJugadores().get(eleccion-1);
             jugadorAmarilla.setTa(jugadorAmarilla.getTa()+1);
             System.out.println(String.format("Algun otro jugador recibio amarilla del equipo %s", nombre));
             System.out.println("1.Si \n2.No");
@@ -109,10 +111,10 @@ public class PartidoController {
         while (true) {
             System.out.println(String.format("Selecciona quien realizo una tarjeta roja del equipo %s", nombre));
             for (int index = 0; index < equipo.getJugadores().size(); index++) {
-                System.out.println(String.format("%d. %s", index+1, equipo.getJugadores().get(index)));
+                System.out.println(String.format("%d. %s", index+1, equipo.getJugadores().get(index).getNombre()));
             }
             int eleccion = input.nextInt();
-            Jugador jugadorRoja = equipo.getJugadores().get(eleccion+1);
+            Jugador jugadorRoja = equipo.getJugadores().get(eleccion-1);
             jugadorRoja.setTa(jugadorRoja.getTa()+1);
             System.out.println(String.format("Algun otro jugador recibio roja del equipo %s", nombre));
             System.out.println("1.Si \n2.No");

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Jugador extends Personal{
     int dorsal;
     String posicion;
-    int goles;
+    int goles = 0;
     String nacionalidad;
     Date fechaIngreso;
     int ta = 0;

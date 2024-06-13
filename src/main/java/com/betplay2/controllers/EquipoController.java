@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.betplay2.models.Create;
 import com.betplay2.models.Equipo;
+import com.betplay2.models.Jugador;
 
 
 public class EquipoController implements Create<Boolean>{
@@ -29,6 +30,22 @@ public class EquipoController implements Create<Boolean>{
         ArrayList<Equipo> copia = new ArrayList<>();
         copia.addAll(equipos);
         return copia;
+    }
+    public Equipo elegirEquipo(Scanner input){
+        System.out.println("Selecciona el equipo");
+        for (int index = 0; index < equipos.size(); index++) {
+            System.out.println(String.format("%d. %s", index+1, equipos.get(index).getNombre()));
+        }
+        int eleccion = input.nextInt();
+        input.nextLine();
+        return equipos.get(eleccion-1);
+    }
+    public void registrarJugador(Scanner input, Equipo equipo){
+        JugadorController jugadorController = new JugadorController();
+        Jugador jugador = jugadorController.create(input);
+        ArrayList<Jugador> jugadores = equipo.getJugadores();
+        jugadores.add(jugador);
+        equipo.setJugadores(jugadores);
     }
     public ArrayList<Equipo> getEquipos() {
         return equipos;
