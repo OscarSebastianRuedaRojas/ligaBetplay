@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.betplay2.models.Create;
 import com.betplay2.models.Equipo;
 import com.betplay2.models.Jugador;
+import com.betplay2.models.CMedico;
 
 
 public class EquipoController implements Create<Boolean>{
@@ -49,6 +50,13 @@ public class EquipoController implements Create<Boolean>{
         ArrayList<Jugador> jugadores = equipo.getJugadores();
         jugadores.add(jugador);
         equipo.setJugadores(jugadores);
+    }
+    public void registrarCMedico(Scanner input, Equipo equipo){
+        CMedicoController cMedicoController = new CMedicoController();
+        CMedico cuerpCMedico = cMedicoController.create(input);
+        ArrayList<CMedico> cuerpMedicos = equipo.getcMedico();
+        cuerpMedicos.add(cuerpCMedico);
+        equipo.setcMedico(cuerpMedicos);
     }
     public ArrayList<Equipo> getEquipos() {
         return equipos;

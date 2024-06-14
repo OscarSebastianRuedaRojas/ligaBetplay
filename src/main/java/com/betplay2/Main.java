@@ -46,7 +46,7 @@ public class Main {
                                 
                                 break;
                             case 3:
-                                
+                                equipos.registrarCMedico(input, equipo);
                                 break;
                             case 4:
                                 seguir2 = false;    
