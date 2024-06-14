@@ -43,7 +43,7 @@ public class Main {
                                 equipos.registrarJugador(input, equipo);
                                 break;
                             case 2:
-                                
+                                equipos.registrarCTecnico(input, equipo);
                                 break;
                             case 3:
                                 equipos.registrarCMedico(input, equipo);
