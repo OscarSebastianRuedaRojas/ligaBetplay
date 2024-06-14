@@ -82,6 +82,7 @@ public class Main {
         input.nextLine();
         return responder;
     }
+    
     public static int menuPersonal(Scanner input){
         System.out.println("Agregar Personal");
         System.out.println("1. Agregar Jugador");

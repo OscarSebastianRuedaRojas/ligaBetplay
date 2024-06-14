@@ -9,6 +9,7 @@ import com.betplay2.models.Partido;
 
 public class PartidoController {
     ArrayList<Partido> partidos = new ArrayList<>();
+    
     public void create(Scanner input, ArrayList<Equipo> copia, ArrayList<Equipo> original){
         Partido partido = new Partido();
         partido.setEquipoLocal(readEquipos(copia, "local", input));
@@ -23,6 +24,7 @@ public class PartidoController {
         registroRojas(partido.getEquipoLocal(), input, "Local");
         registroRojas(partido.getEquipoVisitante(), input, "Visitante");
     }
+
     private Equipo readEquipos(ArrayList<Equipo> equipos, String equipo, Scanner input){
         System.out.println(String.format("Selecciona al equipo %s", equipo));
         for (int i = 0; i < equipos.size(); i++) {
@@ -88,6 +90,7 @@ public class PartidoController {
         partido.getEquipoLocal().setGC(partido.getEquipoLocal().getGC()+partido.getGolesVisitante());
         partido.getEquipoVisitante().setGF(partido.getEquipoVisitante().getGF()+partido.getGolesVisitante());
         partido.getEquipoVisitante().setGC(partido.getEquipoVisitante().getGC()+partido.getGolesLocal());
+        
     }
     private void registroAmarillas(Equipo equipo, Scanner input, String nombre){
         while (true) {

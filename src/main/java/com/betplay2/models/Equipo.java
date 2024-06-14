@@ -12,23 +12,30 @@ public class Equipo {
     int GC = 0;
     int TP = 0;
     int puntos = 0;
+
     ArrayList<Jugador> jugadores = new ArrayList<>();
     ArrayList<CMedico> cMedico = new ArrayList<>();
     ArrayList<CTecnico> cTecnico = new ArrayList<>();
+
     public Equipo() {
     }
+
     public Equipo(String nombre) {
         this.nombre = nombre;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public int getPJ() {
         return PJ;
     }
+    
     public void setPJ(int pJ) {
         PJ = pJ;
     }

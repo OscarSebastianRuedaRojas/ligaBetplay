@@ -26,11 +26,13 @@ public class EquipoController implements Create<Boolean>{
             return false;
         }
     }
+
     public ArrayList<Equipo> copiaArrayList(){
         ArrayList<Equipo> copia = new ArrayList<>();
         copia.addAll(equipos);
         return copia;
     }
+
     public Equipo elegirEquipo(Scanner input){
         System.out.println("Selecciona el equipo");
         for (int index = 0; index < equipos.size(); index++) {
@@ -40,6 +42,7 @@ public class EquipoController implements Create<Boolean>{
         input.nextLine();
         return equipos.get(eleccion-1);
     }
+    
     public void registrarJugador(Scanner input, Equipo equipo){
         JugadorController jugadorController = new JugadorController();
         Jugador jugador = jugadorController.create(input);
