@@ -33,6 +33,7 @@ public class Main {
                     partidos.create(input, equipos.copiaArrayList(), equipos.getEquipos());
                     break;
                 case 3:
+                    seguir3 = true;
                     while (seguir3) {
                         switch (menuReportes(input)) {
                             case 1:
@@ -60,10 +61,10 @@ public class Main {
                                 System.out.println(String.format("El jugador con mas goles es %s", equipos.jugadorConMasGoles().getNombre()));
                                 break;
                             case 7:
-                                System.out.println(String.format("El jugador con mas tarjetas amarillas es %s", equipos.jugadorConMasTarjetasAmarillas()));
+                                System.out.println(String.format("El jugador con mas tarjetas amarillas es %s", equipos.jugadorConMasTarjetasAmarillas().getNombre()));
                                 break;
                             case 8:
-                                System.out.println(String.format("El jugador con mas tarjetas rojas es %s", equipos.jugadorConMasTarjetasRojas()));
+                                System.out.println(String.format("El jugador con mas tarjetas rojas es %s", equipos.jugadorConMasTarjetasRojas().getNombre()));
                                 break;
                             case 9:
                                 equipos.mostrarJugadoresPorEquipo();
@@ -80,10 +81,16 @@ public class Main {
                     }
                     break;
                 case 4:
-                    
+                    ArrayList<Equipo> equiposPuntos = equipos.copiaArrayList();
+                    EquipoController.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
+                    System.out.println(String.format("%-20s %4s %4s %4s %4s %4s %4s %4s %4s", "Club", "PJ", "PG", "PE", "PP", "GF", "GC", "DG", "Pts"));
+                    for (int i = equiposPuntos.size()-1; i >= 0 ; i--) {
+                        System.out.println(String.format("%-20s %4d %4d %4d %4d %4d %4d %4d %4d", equiposPuntos.get(i).getNombre(), equiposPuntos.get(i).getPJ(), equiposPuntos.get(i).getPG(), equiposPuntos.get(i).getPE(), equiposPuntos.get(i).getPP(), equiposPuntos.get(i).getGF(), equiposPuntos.get(i).getGC(), equiposPuntos.get(i).getGF()-equiposPuntos.get(i).getGC(), equiposPuntos.get(i).getPuntos()) );
+                    }
                     break;
                 case 5:
                     Equipo equipo = equipos.elegirEquipo(input);
+                    seguir2 = true;
                     while (seguir2) {
                         switch (menuPersonal(input)) {
                             case 1:

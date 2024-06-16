@@ -23,6 +23,7 @@ public class PartidoController {
         registroAmarillas(partido.getEquipoVisitante(), input, "Visitante");
         registroRojas(partido.getEquipoLocal(), input, "Local");
         registroRojas(partido.getEquipoVisitante(), input, "Visitante");
+        partidos.add(partido);
     }
 
     private Equipo readEquipos(ArrayList<Equipo> equipos, String equipo, Scanner input){
@@ -118,7 +119,7 @@ public class PartidoController {
             }
             int eleccion = input.nextInt();
             Jugador jugadorRoja = equipo.getJugadores().get(eleccion-1);
-            jugadorRoja.setTa(jugadorRoja.getTa()+1);
+            jugadorRoja.setTr(jugadorRoja.getTr()+1);
             System.out.println(String.format("Algun otro jugador recibio roja del equipo %s", nombre));
             System.out.println("1.Si \n2.No");
             int eleccion2 = input.nextInt();
