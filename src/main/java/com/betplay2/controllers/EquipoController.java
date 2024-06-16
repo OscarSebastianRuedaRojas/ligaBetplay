@@ -2,6 +2,7 @@ package com.betplay2.controllers;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import com.betplay2.models.Create;
 import com.betplay2.models.Equipo;
@@ -66,6 +67,97 @@ public class EquipoController implements Create<Boolean>{
         cuerpTecnicos.add(cuerpCTecnico);
         equipo.setcTecnico(cuerpTecnicos);
     }
+    public static void quicksort(ArrayList<Equipo> equipos, int izq, int der, Comparator<Equipo> comparator) {
+        if (izq < der) {
+            int pivoteIndex = partition(equipos, izq, der, comparator);
+            quicksort(equipos, izq, pivoteIndex - 1, comparator);
+            quicksort(equipos, pivoteIndex + 1, der, comparator);
+        }
+    }
+
+    private static int partition(ArrayList<Equipo> equipos, int izq, int der, Comparator<Equipo> comparator) {
+        Equipo pivote = equipos.get(izq);
+        int i = izq;
+        int j = der;
+        Equipo aux;
+        while (i < j) {
+            while (i < j && comparator.compare(equipos.get(i), pivote) <= 0) i++;
+            while (comparator.compare(equipos.get(j), pivote) > 0) j--;
+            if (i < j) {
+                aux = equipos.get(i);
+                equipos.set(i, equipos.get(j));
+                equipos.set(j, aux);
+            }
+        }
+        equipos.set(izq, equipos.get(j));
+        equipos.set(j, pivote);
+        return j;
+    }
+    public Jugador jugadorConMasGoles() {
+        Jugador maxJugador = null;
+        int maxGoles = 0;
+        for (Equipo equipo : equipos) {
+            for (Jugador jugador : equipo.getJugadores()) {
+                if (jugador.getGoles() > maxGoles) {
+                    maxGoles = jugador.getGoles();
+                    maxJugador = jugador;
+                }
+            }
+        }
+        return maxJugador;
+    }
+
+    public Jugador jugadorConMasTarjetasAmarillas() {
+        Jugador maxJugador = null;
+        int maxTarjetasAmarillas = 0;
+        for (Equipo equipo : equipos) {
+            for (Jugador jugador : equipo.getJugadores()) {
+                if (jugador.getTa() > maxTarjetasAmarillas) {
+                    maxTarjetasAmarillas = jugador.getTa();
+                    maxJugador = jugador;
+                }
+            }
+        }
+        return maxJugador;
+    }
+
+    public Jugador jugadorConMasTarjetasRojas() {
+        Jugador maxJugador = null;
+        int maxTarjetasRojas = 0;
+        for (Equipo equipo : equipos) {
+            for (Jugador jugador : equipo.getJugadores()) {
+                if (jugador.getTr() > maxTarjetasRojas) {
+                    maxTarjetasRojas = jugador.getTr();
+                    maxJugador = jugador;
+                }
+            }
+        }
+        return maxJugador;
+    }
+    public void mostrarJugadoresPorEquipo() {
+        for (Equipo equipo : equipos) {
+            System.out.println("Equipo: " + equipo.getNombre());
+            for (Jugador jugador : equipo.getJugadores()) {
+                System.out.println(String.format("Jugador: %s, Dorsal: %d, Posición: %s, Goles: %d, Tarjetas Amarillas: %d, Tarjetas Rojas: %d",
+                        jugador.getNombre(), jugador.getDorsal(), jugador.getPosicion(), jugador.getGoles(), jugador.getTa(), jugador.getTr()));
+            }
+        }
+    }
+    public void listarCuerpoTecnico() {
+        for (Equipo equipo : equipos) {
+            System.out.println("Equipo: " + equipo.getNombre());
+            for (CTecnico cTecnico : equipo.getcTecnico()) {
+                System.out.println(String.format("Cuerpo Técnico: %s, Cargo: %s", cTecnico.getNombre(), cTecnico.getRol()));
+            }
+        }
+    }
+    public int golesTotal(){
+        int goles = 0;
+        for (Equipo equipo : equipos) {
+            goles += equipo.getGF();
+        }
+        return goles;
+    }
     public ArrayList<Equipo> getEquipos() {
         return equipos;
     }
@@ -73,4 +165,5 @@ public class EquipoController implements Create<Boolean>{
         this.equipos = equipos;
     }
     
+
 }

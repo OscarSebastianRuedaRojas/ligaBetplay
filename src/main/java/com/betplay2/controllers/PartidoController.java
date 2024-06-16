@@ -128,4 +128,13 @@ public class PartidoController {
             }
         }
     }
+
+    public ArrayList<Partido> getPartidos() {
+        return partidos;
+    }
+
+    public void setPartidos(ArrayList<Partido> partidos) {
+        this.partidos = partidos;
+    }
+    
 }
