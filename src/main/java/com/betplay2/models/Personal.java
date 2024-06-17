@@ -5,6 +5,13 @@ public class Personal {
     String nombre;
     String apellidos;
     int edad;
+    int equipoId;
+    public int getEquipoId() {
+        return equipoId;
+    }
+    public void setEquipoId(int equipoId) {
+        this.equipoId = equipoId;
+    }
     public void concentrarse(){
         System.out.println(String.format("%s esta en concentracion junto al equipo", this.nombre));
     }

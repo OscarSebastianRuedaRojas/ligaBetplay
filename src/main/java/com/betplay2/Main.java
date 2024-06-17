@@ -8,6 +8,7 @@ import java.util.Scanner;
 import com.betplay2.controllers.EquipoController;
 import com.betplay2.controllers.PartidoController;
 import com.betplay2.models.Equipo;
+import com.betplay2.models.EquipoJava;
 
 
 public class Main {
@@ -37,17 +38,17 @@ public class Main {
                     while (seguir3) {
                         switch (menuReportes(input)) {
                             case 1:
-                                ArrayList<Equipo> equiposGF = equipos.copiaArrayList();
+                                ArrayList<EquipoJava> equiposGF = equipos.copiaArrayList();
                                 EquipoController.quicksort(equiposGF, 0, equiposGF.size() - 1, Comparator.comparingInt(Equipo::getGF));
                                 System.out.println(String.format("El equipo con mas goles del torneo es %s", equiposGF.get(equiposGF.size()-1).getNombre()));
                                 break;
                             case 2:
-                                ArrayList<Equipo> equiposPuntos = equipos.copiaArrayList();
+                                ArrayList<EquipoJava> equiposPuntos = equipos.copiaArrayList();
                                 EquipoController.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
                                 System.out.println(String.format("El equipo con mas puntos del torneo es %s", equiposPuntos.get(equiposPuntos.size()-1).getNombre()));
                                 break;
                             case 3:
-                                ArrayList<Equipo> equiposPG = equipos.copiaArrayList();
+                                ArrayList<EquipoJava> equiposPG = equipos.copiaArrayList();
                                 EquipoController.quicksort(equiposPG, 0, equiposPG.size() - 1, Comparator.comparingInt(Equipo::getPG));
                                 System.out.println(String.format("El equipo con mas partidos gano del torneo es %s", equiposPG.get(equiposPG.size()-1).getNombre()));
                                 break;
@@ -81,7 +82,7 @@ public class Main {
                     }
                     break;
                 case 4:
-                    ArrayList<Equipo> equiposPuntos = equipos.copiaArrayList();
+                    ArrayList<EquipoJava> equiposPuntos = equipos.copiaArrayList();
                     EquipoController.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
                     System.out.println(String.format("%-20s %4s %4s %4s %4s %4s %4s %4s %4s", "Club", "PJ", "PG", "PE", "PP", "GF", "GC", "DG", "Pts"));
                     for (int i = equiposPuntos.size()-1; i >= 0 ; i--) {
@@ -89,7 +90,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    Equipo equipo = equipos.elegirEquipo(input);
+                    EquipoJava equipo = equipos.elegirEquipo(input);
                     seguir2 = true;
                     while (seguir2) {
                         switch (menuPersonal(input)) {

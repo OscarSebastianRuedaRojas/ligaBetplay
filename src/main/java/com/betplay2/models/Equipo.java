@@ -1,8 +1,8 @@
 package com.betplay2.models;
 
-import java.util.ArrayList;
 
 public class Equipo {
+    int id;
     String nombre;
     int PJ = 0;
     int PG = 0;
@@ -13,9 +13,6 @@ public class Equipo {
     int TP = 0;
     int puntos = 0;
 
-    ArrayList<Jugador> jugadores = new ArrayList<>();
-    ArrayList<CMedico> cMedico = new ArrayList<>();
-    ArrayList<CTecnico> cTecnico = new ArrayList<>();
 
     public Equipo() {
     }
@@ -23,7 +20,13 @@ public class Equipo {
     public Equipo(String nombre) {
         this.nombre = nombre;
     }
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -81,23 +84,7 @@ public class Equipo {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
-    public ArrayList<Jugador> getJugadores() {
-        return jugadores;
-    }
-    public void setJugadores(ArrayList<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
-    public ArrayList<CMedico> getcMedico() {
-        return cMedico;
-    }
-    public void setcMedico(ArrayList<CMedico> cMedico) {
-        this.cMedico = cMedico;
-    }
-    public ArrayList<CTecnico> getcTecnico() {
-        return cTecnico;
-    }
-    public void setcTecnico(ArrayList<CTecnico> cTecnico) {
-        this.cTecnico = cTecnico;
-    }
+
+    
     
 }

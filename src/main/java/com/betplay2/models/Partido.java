@@ -1,30 +1,30 @@
 package com.betplay2.models;
 
 public class Partido {
-    Equipo equipoLocal;
-    Equipo equipoVisitante;
+    EquipoJava equipoLocal;
+    EquipoJava equipoVisitante;
     String fecha;
     int golesLocal;
     int golesVisitante;
     public Partido() {
     }
-    public Partido(Equipo equipoLocal, Equipo equipoVisitante, String fecha, int golesLocal, int golesVisitante) {
+    public Partido(EquipoJava equipoLocal, EquipoJava equipoVisitante, String fecha, int golesLocal, int golesVisitante) {
         this.equipoLocal = equipoLocal;
         this.equipoVisitante = equipoVisitante;
         this.fecha = fecha;
         this.golesLocal = golesLocal;
         this.golesVisitante = golesVisitante;
     }
-    public Equipo getEquipoLocal() {
+    public EquipoJava getEquipoLocal() {
         return equipoLocal;
     }
-    public void setEquipoLocal(Equipo equipoLocal) {
+    public void setEquipoLocal(EquipoJava equipoLocal) {
         this.equipoLocal = equipoLocal;
     }
-    public Equipo getEquipoVisitante() {
+    public EquipoJava getEquipoVisitante() {
         return equipoVisitante;
     }
-    public void setEquipoVisitante(Equipo equipoVisitante) {
+    public void setEquipoVisitante(EquipoJava equipoVisitante) {
         this.equipoVisitante = equipoVisitante;
     }
     public String getFecha() {

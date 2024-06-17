@@ -3,14 +3,14 @@ package com.betplay2.controllers;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.betplay2.models.Equipo;
+import com.betplay2.models.EquipoJava;
 import com.betplay2.models.Jugador;
 import com.betplay2.models.Partido;
 
 public class PartidoController {
     ArrayList<Partido> partidos = new ArrayList<>();
-    
-    public void create(Scanner input, ArrayList<Equipo> copia, ArrayList<Equipo> original){
+
+    public void create(Scanner input, ArrayList<EquipoJava> copia, ArrayList<EquipoJava> original) {
         Partido partido = new Partido();
         partido.setEquipoLocal(readEquipos(copia, "local", input));
         partido.setEquipoVisitante(readEquipos(copia, "Visitante", input));
@@ -24,107 +24,112 @@ public class PartidoController {
         registroRojas(partido.getEquipoLocal(), input, "Local");
         registroRojas(partido.getEquipoVisitante(), input, "Visitante");
         partidos.add(partido);
+        original.add(partido.getEquipoLocal());
+        original.add(partido.getEquipoVisitante());
     }
 
-    private Equipo readEquipos(ArrayList<Equipo> equipos, String equipo, Scanner input){
+    private EquipoJava readEquipos(ArrayList<EquipoJava> equipos, String equipo, Scanner input) {
         System.out.println(String.format("Selecciona al equipo %s", equipo));
         for (int i = 0; i < equipos.size(); i++) {
-            System.out.println(String.format("%d. %s", i+1, equipos.get(i).getNombre()));
+            System.out.println(String.format("%d. %s", i + 1, equipos.get(i).getNombre()));
         }
         int eleccion = input.nextInt();
         input.nextLine();
-        Equipo equipoSeleccionado = equipos.get(eleccion - 1);
-        equipos.remove(eleccion - 1);
+        EquipoJava equipoSeleccionado = equipos.get(eleccion - 1);
         return equipoSeleccionado;
     }
-    private int goles(Equipo equipo, Scanner input){
+
+    private int goles(EquipoJava equipo, Scanner input) {
         System.out.println(String.format("Ingresa los goles realizados por %s", equipo.getNombre()));
         int goles = input.nextInt();
         int golesTotal = goles;
         input.nextLine();
-        if (golesTotal>0) {
+        if (golesTotal > 0) {
             while (true) {
                 System.out.println(String.format("Selecciona quien marco gol para el %s", equipo.getNombre()));
                 for (int i = 0; i < equipo.getJugadores().size(); i++) {
-                    System.out.println(String.format("%d. %s", i+1, equipo.getJugadores().get(i).getNombre()));
+                    System.out.println(String.format("%d. %s", i + 1, equipo.getJugadores().get(i).getNombre()));
                 }
                 int eleccion = input.nextInt();
-                Jugador jugador = equipo.getJugadores().get(eleccion-1);
+                Jugador jugador = equipo.getJugadores().get(eleccion - 1);
                 input.nextLine();
                 System.out.println(String.format("Cuantos goles marco %s", jugador.getNombre()));
                 while (true) {
                     int golesJugador = input.nextInt();
                     input.nextLine();
-                    if (goles-golesJugador>=0) {
-                        goles = goles-golesJugador;
-                        jugador.setGoles(jugador.getGoles()+golesJugador);
+                    if (goles - golesJugador >= 0) {
+                        goles = goles - golesJugador;
+                        jugador.setGoles(jugador.getGoles() + golesJugador);
                         break;
-                    } else{
-                        System.out.println("El jugador no pudo realizar tantos goles intentalo otra vez");
+                    } else {
+                        System.out.println("El jugador no pudo realizar tantos goles, inténtalo otra vez");
                     }
                 }
-                if (goles==0) {
+                if (goles == 0) {
                     break;
                 }
             }
         }
         return golesTotal;
     }
-    private void registroDatos(Partido partido){
-        if (partido.getGolesLocal()>partido.getGolesVisitante()) {
-            partido.getEquipoLocal().setPuntos(partido.getEquipoLocal().getPuntos()+3);
-            partido.getEquipoLocal().setPG(partido.getEquipoLocal().getPG()+1);
-            partido.getEquipoVisitante().setPP(partido.getEquipoVisitante().getPP()+1);
-        }else if(partido.getGolesLocal()==partido.getGolesVisitante()){
-            partido.getEquipoLocal().setPuntos(partido.getEquipoLocal().getPuntos()+1);
-            partido.getEquipoVisitante().setPuntos(partido.getEquipoVisitante().getPuntos()+1);
-            partido.getEquipoLocal().setPE(partido.getEquipoLocal().getPE()+1);
-            partido.getEquipoVisitante().setPE(partido.getEquipoVisitante().getPE()+1);
-        }else{
-            partido.getEquipoVisitante().setPuntos(partido.getEquipoVisitante().getPuntos()+3);
-            partido.getEquipoVisitante().setPG(partido.getEquipoVisitante().getPG()+1);
-            partido.getEquipoLocal().setPP(partido.getEquipoLocal().getPP()+1);
+
+    private void registroDatos(Partido partido) {
+        if (partido.getGolesLocal() > partido.getGolesVisitante()) {
+            partido.getEquipoLocal().setPuntos(partido.getEquipoLocal().getPuntos() + 3);
+            partido.getEquipoLocal().setPG(partido.getEquipoLocal().getPG() + 1);
+            partido.getEquipoVisitante().setPP(partido.getEquipoVisitante().getPP() + 1);
+        } else if (partido.getGolesLocal() == partido.getGolesVisitante()) {
+            partido.getEquipoLocal().setPuntos(partido.getEquipoLocal().getPuntos() + 1);
+            partido.getEquipoVisitante().setPuntos(partido.getEquipoVisitante().getPuntos() + 1);
+            partido.getEquipoLocal().setPE(partido.getEquipoLocal().getPE() + 1);
+            partido.getEquipoVisitante().setPE(partido.getEquipoVisitante().getPE() + 1);
+        } else {
+            partido.getEquipoVisitante().setPuntos(partido.getEquipoVisitante().getPuntos() + 3);
+            partido.getEquipoVisitante().setPG(partido.getEquipoVisitante().getPG() + 1);
+            partido.getEquipoLocal().setPP(partido.getEquipoLocal().getPP() + 1);
         }
-        partido.getEquipoLocal().setPJ(partido.getEquipoLocal().getPJ()+1);
-        partido.getEquipoVisitante().setPJ(partido.getEquipoVisitante().getPJ()+1);
-        partido.getEquipoLocal().setGF(partido.getEquipoLocal().getGF()+partido.getGolesLocal());
-        partido.getEquipoLocal().setGC(partido.getEquipoLocal().getGC()+partido.getGolesVisitante());
-        partido.getEquipoVisitante().setGF(partido.getEquipoVisitante().getGF()+partido.getGolesVisitante());
-        partido.getEquipoVisitante().setGC(partido.getEquipoVisitante().getGC()+partido.getGolesLocal());
-        
+        partido.getEquipoLocal().setPJ(partido.getEquipoLocal().getPJ() + 1);
+        partido.getEquipoVisitante().setPJ(partido.getEquipoVisitante().getPJ() + 1);
+        partido.getEquipoLocal().setGF(partido.getEquipoLocal().getGF() + partido.getGolesLocal());
+        partido.getEquipoLocal().setGC(partido.getEquipoLocal().getGC() + partido.getGolesVisitante());
+        partido.getEquipoVisitante().setGF(partido.getEquipoVisitante().getGF() + partido.getGolesVisitante());
+        partido.getEquipoVisitante().setGC(partido.getEquipoVisitante().getGC() + partido.getGolesLocal());
+
     }
-    private void registroAmarillas(Equipo equipo, Scanner input, String nombre){
+
+    private void registroAmarillas(EquipoJava equipo, Scanner input, String nombre) {
         while (true) {
             System.out.println(String.format("Selecciona quien realizo una tarjeta amarilla del equipo %s", nombre));
             for (int index = 0; index < equipo.getJugadores().size(); index++) {
-                System.out.println(String.format("%d. %s", index+1, equipo.getJugadores().get(index).getNombre()));
+                System.out.println(String.format("%d. %s", index + 1, equipo.getJugadores().get(index).getNombre()));
             }
             int eleccion = input.nextInt();
-            Jugador jugadorAmarilla = equipo.getJugadores().get(eleccion-1);
-            jugadorAmarilla.setTa(jugadorAmarilla.getTa()+1);
+            Jugador jugadorAmarilla = equipo.getJugadores().get(eleccion - 1);
+            jugadorAmarilla.setTa(jugadorAmarilla.getTa() + 1);
             System.out.println(String.format("Algun otro jugador recibio amarilla del equipo %s", nombre));
             System.out.println("1.Si \n2.No");
             int eleccion2 = input.nextInt();
             input.nextLine();
-            if (eleccion2==2) {
+            if (eleccion2 == 2) {
                 break;
             }
         }
     }
-    private void registroRojas(Equipo equipo, Scanner input, String nombre){
+
+    private void registroRojas(EquipoJava equipo, Scanner input, String nombre) {
         while (true) {
             System.out.println(String.format("Selecciona quien realizo una tarjeta roja del equipo %s", nombre));
             for (int index = 0; index < equipo.getJugadores().size(); index++) {
-                System.out.println(String.format("%d. %s", index+1, equipo.getJugadores().get(index).getNombre()));
+                System.out.println(String.format("%d. %s", index + 1, equipo.getJugadores().get(index).getNombre()));
             }
             int eleccion = input.nextInt();
-            Jugador jugadorRoja = equipo.getJugadores().get(eleccion-1);
-            jugadorRoja.setTr(jugadorRoja.getTr()+1);
+            Jugador jugadorRoja = equipo.getJugadores().get(eleccion - 1);
+            jugadorRoja.setTr(jugadorRoja.getTr() + 1);
             System.out.println(String.format("Algun otro jugador recibio roja del equipo %s", nombre));
             System.out.println("1.Si \n2.No");
             int eleccion2 = input.nextInt();
             input.nextLine();
-            if (eleccion2==2) {
+            if (eleccion2 == 2) {
                 break;
             }
         }
@@ -137,5 +142,4 @@ public class PartidoController {
     public void setPartidos(ArrayList<Partido> partidos) {
         this.partidos = partidos;
     }
-    
 }
