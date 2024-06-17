@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
-import com.betplay2.controllers.EquipoController;
-import com.betplay2.controllers.PartidoController;
-import com.betplay2.models.Equipo;
-import com.betplay2.models.EquipoJava;
+import com.betplay2.Equipo.aplicacion.service.EquipoService;
+import com.betplay2.Partido.aplicacion.service.PartidoService;
+import com.betplay2.Equipo.domain.Equipo;
+import com.betplay2.Equipo.domain.EquipoJava;
 
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        EquipoController equipos = new EquipoController();
-        PartidoController partidos = new PartidoController();
+        EquipoService equipos = new EquipoService();
+        PartidoService partidos = new PartidoService();
         Boolean seguir = true;
         Boolean seguir2 = true;
         Boolean seguir3 = true;
@@ -31,7 +31,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    partidos.create(input, equipos.copiaArrayList(), equipos.getEquipos());
+                    partidos.create(input, equipos.copiaArrayList());
                     break;
                 case 3:
                     seguir3 = true;
@@ -39,17 +39,17 @@ public class Main {
                         switch (menuReportes(input)) {
                             case 1:
                                 ArrayList<EquipoJava> equiposGF = equipos.copiaArrayList();
-                                EquipoController.quicksort(equiposGF, 0, equiposGF.size() - 1, Comparator.comparingInt(Equipo::getGF));
+                                EquipoService.quicksort(equiposGF, 0, equiposGF.size() - 1, Comparator.comparingInt(Equipo::getGF));
                                 System.out.println(String.format("El equipo con mas goles del torneo es %s", equiposGF.get(equiposGF.size()-1).getNombre()));
                                 break;
                             case 2:
                                 ArrayList<EquipoJava> equiposPuntos = equipos.copiaArrayList();
-                                EquipoController.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
+                                EquipoService.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
                                 System.out.println(String.format("El equipo con mas puntos del torneo es %s", equiposPuntos.get(equiposPuntos.size()-1).getNombre()));
                                 break;
                             case 3:
                                 ArrayList<EquipoJava> equiposPG = equipos.copiaArrayList();
-                                EquipoController.quicksort(equiposPG, 0, equiposPG.size() - 1, Comparator.comparingInt(Equipo::getPG));
+                                EquipoService.quicksort(equiposPG, 0, equiposPG.size() - 1, Comparator.comparingInt(Equipo::getPG));
                                 System.out.println(String.format("El equipo con mas partidos gano del torneo es %s", equiposPG.get(equiposPG.size()-1).getNombre()));
                                 break;
                             case 4:
@@ -83,7 +83,7 @@ public class Main {
                     break;
                 case 4:
                     ArrayList<EquipoJava> equiposPuntos = equipos.copiaArrayList();
-                    EquipoController.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
+                    EquipoService.quicksort(equiposPuntos, 0, equiposPuntos.size() - 1, Comparator.comparingInt(Equipo::getPuntos));
                     System.out.println(String.format("%-20s %4s %4s %4s %4s %4s %4s %4s %4s", "Club", "PJ", "PG", "PE", "PP", "GF", "GC", "DG", "Pts"));
                     for (int i = equiposPuntos.size()-1; i >= 0 ; i--) {
                         System.out.println(String.format("%-20s %4d %4d %4d %4d %4d %4d %4d %4d", equiposPuntos.get(i).getNombre(), equiposPuntos.get(i).getPJ(), equiposPuntos.get(i).getPG(), equiposPuntos.get(i).getPE(), equiposPuntos.get(i).getPP(), equiposPuntos.get(i).getGF(), equiposPuntos.get(i).getGC(), equiposPuntos.get(i).getGF()-equiposPuntos.get(i).getGC(), equiposPuntos.get(i).getPuntos()) );
