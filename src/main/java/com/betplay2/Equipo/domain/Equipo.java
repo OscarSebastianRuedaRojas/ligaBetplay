@@ -20,6 +20,20 @@ public class Equipo {
     public Equipo(String nombre) {
         this.nombre = nombre;
     }
+    
+    public Equipo(int id, String nombre, int pJ, int pG, int pP, int pE, int gF, int gC, int tP, int puntos) {
+        this.id = id;
+        this.nombre = nombre;
+        PJ = pJ;
+        PG = pG;
+        PP = pP;
+        PE = pE;
+        GF = gF;
+        GC = gC;
+        TP = tP;
+        this.puntos = puntos;
+    }
+
     public int getId() {
         return id;
     }

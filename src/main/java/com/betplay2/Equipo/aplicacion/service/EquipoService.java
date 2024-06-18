@@ -11,11 +11,13 @@ import com.betplay2.CTecnico.domain.CTecnico;
 import com.betplay2.Equipo.aplicacion.port.in.IEquipoService;
 import com.betplay2.Equipo.domain.Equipo;
 import com.betplay2.Equipo.domain.EquipoJava;
+import com.betplay2.Equipo.infraestrutura.adapter.out.EquipoMySQLRepository;
 import com.betplay2.Jugador.aplicacion.service.JugadorService;
 import com.betplay2.Jugador.domain.Jugador;
 
 public class EquipoService implements IEquipoService{
     ArrayList<EquipoJava> equipos = new ArrayList<>();
+    EquipoMySQLRepository equipoMySQLRepository = new EquipoMySQLRepository("jdbc:mysql://localhost:3306/ligabetplay", "root", "");
 
     @Override
     public Boolean create(Scanner input) {
@@ -24,6 +26,7 @@ public class EquipoService implements IEquipoService{
         equipo.setNombre(input.nextLine());
         equipo.setId(equipos.size() + 1);
         equipos.add(equipo);
+        equipoMySQLRepository.save(equipo);
         System.out.println(String.format("El equipo %s fue agregado exitosamente", equipo.getNombre()));
         System.out.println("Desea agregar otro equipo? \n 1.Si \n 2.No");
         int respuesta = input.nextInt();
